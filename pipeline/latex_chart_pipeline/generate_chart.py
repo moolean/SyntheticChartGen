@@ -136,7 +136,7 @@ class GenerateChart(SuperStep):
 
         # Check if pdflatex and pdf2image is available
         check_pdflatex()
-        check_tools()
+        check_tools() #先不check 试试
 
         # Generate Images
         def execute_code_and_generate_image(row, timeout=20):

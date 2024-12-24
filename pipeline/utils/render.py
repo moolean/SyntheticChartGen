@@ -161,7 +161,7 @@ def render_latex(latex_source):
 
     raise RuntimeError("PDF did not generate anything.")
 
-
+vlc.register_font_directory('/mnt/afs/share_data/yaotiankuo/material/fonts/cn') # 设置字体，需要传入文件夹，传入字体文件没用
 def render_vegalite(vegalite_json):
     png_data = vlc.vegalite_to_png(vl_spec=vegalite_json, scale=random.choice([1.5, 2, 2.5, 3]))
     img_buffer = BytesIO(png_data)
