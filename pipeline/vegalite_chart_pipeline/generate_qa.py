@@ -4,7 +4,14 @@ from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
 
 from ..utils.utils import is_json_valid
-from ..prompts.chart_prompts import GENERATE_CHART_QA_PROMPT
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.chart_prompts_cn import GENERATE_CHART_QA_PROMPT
+elif language == "en":
+    from ..prompts.chart_prompts_en import GENERATE_CHART_QA_PROMPT
+else:
+    raise ValueError
 
 class GenerateChartQA(SuperStep):
     CONFIG_HASH = Hasher.hash([GENERATE_CHART_QA_PROMPT])

@@ -10,9 +10,33 @@ import signal
 from PIL import Image
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
+import matplotlib.pyplot as plt
+from matplotlib import rcParams
+import os
+from matplotlib import font_manager
 
-from ..prompts.chart_prompts import GENERATE_CHART_CODE_MATPLOTLIB_PROMPT
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.chart_prompts_cn import GENERATE_CHART_CODE_MATPLOTLIB_PROMPT
+elif language == "en":
+    from ..prompts.chart_prompts_en import GENERATE_CHART_CODE_MATPLOTLIB_PROMPT
+else:
+    raise ValueError
 from ..utils.utils import extract_code, process_image
+
+# # 定义字体文件夹路径
+# font_folder = '/mnt/afs/share_data/yaotiankuo/material/fonts/cn'  # 替换为你的字体文件夹路径
+
+# # 获取字体文件列表（支持 .ttf 和 .otf 文件）
+# font_files = [os.path.join(font_folder, f) for f in os.listdir(font_folder) if f.endswith(('.ttf', '.otf'))]
+# random_font_path = random.choice(font_files)
+# # 加载字体
+# random_font = font_manager.FontProperties(fname=random_font_path)
+# print(f"使用的字体是: {random_font.get_name()}")  # 打印使用的字体名称
+
+# # 设置 Matplotlib 使用该字体
+# plt.rcParams['font.family'] = random_font.get_name()
+# plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
 NUM_RENDER_WORKERS = 1
 

@@ -10,7 +10,14 @@ from PIL import Image
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
 
-from ..prompts.chart_prompts import GENERATE_CHART_CODE_PLOTLY_PROMPT
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.chart_prompts_cn import GENERATE_CHART_CODE_PLOTLY_PROMPT
+elif language == "en":
+    from ..prompts.chart_prompts_en import GENERATE_CHART_CODE_PLOTLY_PROMPT
+else:
+    raise ValueError
 from ..utils.utils import extract_code, process_image
 
 NUM_RENDER_WORKERS = 1

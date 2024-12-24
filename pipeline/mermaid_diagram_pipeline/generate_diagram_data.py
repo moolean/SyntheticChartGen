@@ -2,8 +2,15 @@ import json
 
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.diagram_prompts_cn import GENERATE_DIAGRAM_DATA_JSON_PROMPT
+elif language == "en":
+    from ..prompts.diagram_prompts_en import GENERATE_DIAGRAM_DATA_JSON_PROMPT
+else:
+    raise ValueError
 
-from ..prompts.diagram_prompts import GENERATE_DIAGRAM_DATA_JSON_PROMPT
 from ..utils.utils import extract_json, is_json_valid
 
 class GenerateDiagramData(SuperStep):

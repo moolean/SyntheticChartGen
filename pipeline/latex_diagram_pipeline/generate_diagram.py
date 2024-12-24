@@ -11,8 +11,14 @@ import signal
 from PIL import Image
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
-
-from ..prompts.diagram_prompts import GENERATE_DIAGRAM_CODE_LATEX_PROMPT
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.diagram_prompts_cn import GENERATE_DIAGRAM_CODE_LATEX_PROMPT
+elif language == "en":
+    from ..prompts.diagram_prompts_en import GENERATE_DIAGRAM_CODE_LATEX_PROMPT
+else:
+    raise ValueError
 from ..utils.utils import extract_latex, process_image
 from ..utils.render import render_latex
 

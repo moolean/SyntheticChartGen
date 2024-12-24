@@ -3,7 +3,14 @@ import json
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
 
-from ..prompts.table_prompts import GENERATE_TABLE_DATA_PROMPT
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.table_prompts_cn import GENERATE_TABLE_DATA_PROMPT
+elif language == "en":
+    from ..prompts.table_prompts_en import GENERATE_TABLE_DATA_PROMPT
+else:
+    raise ValueError
 from ..utils.utils import extract_csv, is_csv_valid
 
 class GenerateTableData(SuperStep):

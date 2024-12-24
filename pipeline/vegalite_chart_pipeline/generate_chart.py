@@ -9,8 +9,14 @@ import signal
 from PIL import Image
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
-
-from ..prompts.chart_prompts import GENERATE_CHART_CODE_VEGALITE_PROMPT
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.chart_prompts_cn import GENERATE_CHART_CODE_VEGALITE_PROMPT
+elif language == "en":
+    from ..prompts.chart_prompts_en import GENERATE_CHART_CODE_VEGALITE_PROMPT
+else:
+    raise ValueError
 from ..utils.utils import extract_json, process_image
 from ..utils.render import render_vegalite
 

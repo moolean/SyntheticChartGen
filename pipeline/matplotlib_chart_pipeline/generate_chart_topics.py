@@ -2,7 +2,14 @@ import os
 import json
 import random
 from ..utils.utils import PERSONAS
-from ..prompts.chart_prompts import GENERATE_CHART_TOPICS_PROMPT, NUM_TOPICS
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.chart_prompts_cn import GENERATE_CHART_TOPICS_PROMPT, NUM_TOPICS
+elif language == "en":
+    from ..prompts.chart_prompts_en import GENERATE_CHART_TOPICS_PROMPT, NUM_TOPICS
+else:
+    raise ValueError
 
 from ordered_set import OrderedSet
 from datasets.fingerprint import Hasher

@@ -12,8 +12,15 @@ from PIL import Image
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
 from ..utils.render import render_latex
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.table_prompts_cn import GENERATE_TABLE_CODE_LATEX_PROMPT
+elif language == "en":
+    from ..prompts.table_prompts_en import GENERATE_TABLE_CODE_LATEX_PROMPT
+else:
+    raise ValueError
 
-from ..prompts.table_prompts import GENERATE_TABLE_CODE_LATEX_PROMPT
 from ..utils.utils import extract_latex, process_image, fix_latex_white_text
 
 NUM_RENDER_WORKERS = 4

@@ -2,7 +2,14 @@ import os
 import json
 import random
 from ..utils.utils import PERSONAS
-from ..prompts.diagram_prompts import GENERATE_DIAGRAM_TOPICS_PROMPT, NUM_TOPICS
+import os
+language = os.environ.get('PIXMO_LANGUAGE')  # 推荐方法
+if language == "cn":
+    from ..prompts.diagram_prompts_cn import GENERATE_DIAGRAM_TOPICS_PROMPT, NUM_TOPICS
+elif language == "en":
+    from ..prompts.diagram_prompts_en import GENERATE_DIAGRAM_TOPICS_PROMPT, NUM_TOPICS
+else:
+    raise ValueError
 
 from datasets.fingerprint import Hasher
 from datadreamer.steps import DataSource, SuperStep, Prompt, zipped
